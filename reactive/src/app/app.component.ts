@@ -1,5 +1,5 @@
 import { Component ,OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators,FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +8,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 })
 export class AppComponent {
   title='reactive'
-  addUserForm: FormGroup;
+  addUserForm: FormGroup ;
   isFormSubmitted = false;
   urlParams: any
   constructor(
@@ -21,15 +21,14 @@ export class AppComponent {
     const PAT_EMAIL = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+[.][a-zA-Z]{2,4}$";
 
     this.addUserForm = new FormGroup({
-      name: new FormControl('',[Validators.required, Validators.pattern(PAT_NAME)]),
-      email:new FormControl('', [Validators.required, Validators.email]) ,
+      name: new FormControl('',[Validators.required]),
+      email:new FormControl('', [Validators.required, Validators.email]),
       address: new FormControl("", Validators.required),
       password:new FormControl("", [Validators.required, Validators.minLength(8)])
     });
   }
     
     submitUser() {
-console.log(this.addUserForm);
 
       this.isFormSubmitted = true;
   
@@ -42,7 +41,6 @@ console.log(this.addUserForm);
     closeModal(close : any){
 
     }
-  
   }
 
    

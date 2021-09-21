@@ -1,5 +1,5 @@
 import { Component ,OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -8,11 +8,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class AppComponent {
   title='reactive'
-  addUserForm: FormGroup | undefined;
+  addUserForm: FormGroup;
   isFormSubmitted = false;
-
+  urlParams: any
   constructor(
-    private formBuilder: FormBuilder
   ) { }
 
   ngOnInit(): void {
@@ -21,15 +20,16 @@ export class AppComponent {
     const PAT_NAME = "^[a-zA-Z ]{2,20}$";
     const PAT_EMAIL = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+[.][a-zA-Z]{2,4}$";
 
-    this.addUserForm = this.formBuilder.group({
-      name: ['', [Validators.required, Validators.pattern(PAT_NAME)]],
-      email: ['', [Validators.required, Validators.pattern(PAT_EMAIL)]],
-      address: ['', Validators.required],
-      password: ['', [Validators.required, Validators.minLength(8)]]
+    this.addUserForm = new FormGroup({
+      name: new FormControl('',[Validators.required, Validators.pattern(PAT_NAME)]),
+      email:new FormControl('', [Validators.required, Validators.email]) ,
+      address: new FormControl("", Validators.required),
+      password:new FormControl("", [Validators.required, Validators.minLength(8)])
     });
   }
     
     submitUser() {
+console.log(this.addUserForm);
 
       this.isFormSubmitted = true;
   
@@ -38,6 +38,9 @@ export class AppComponent {
         return;
       }
       console.log('Submit', this.addUserForm.value);
+    }
+    closeModal(close : any){
+
     }
   
   }

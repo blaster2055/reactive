@@ -29,6 +29,7 @@ export class AppComponent {
   }
     
     submitUser() {
+console.log(this.addUserForm.controls["password"].errors);
 
       this.isFormSubmitted = true;
   
